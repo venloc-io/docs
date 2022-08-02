@@ -1,0 +1,74 @@
+name: Bug report
+description: Create a report to help us improve docs generation
+labels:
+  - bug
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What’s the bug you are facing?
+      description: A clear and concise description of what the bug is.
+      placeholder: "I’m always frustrated when …"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Which node was this experienced in? Are any special extensions installed?
+      description: Please give us more information about your node environment so we can reproduce the bug faster.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: How can we reproduce the bug on our side?
+      description: Steps to reproduce the behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: expectation
+    attributes:
+      label: What did you expect to happen?
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+  
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything to add? (optional)
+      description: "Add any other context, screenshots, videos or GIFs here."
+  
+  - type: checkboxes
+    attributes:
+      label: Did you update your dependencies?
+      description: "Use `npm update` to update your dependencies."
+      options:
+        - label: Yes, I’ve updated my dependencies to use the latest version of all packages.
+          required: true
+
+  - type: input
+    attributes:
+      label: "Node.js version"
+      description: "Which version of Node.js are you using?"
+      placeholder: "14.17.6"
+
+  - type: checkboxes
+    validations:
+      required: true
+    attributes:
+      label: "In which operating systems have you tested?"
+      options:
+        - label: macOS
+        - label: Windows
+        - label: Linux
+  
+  - type: checkboxes
+    attributes:
+      label: Are you sponsoring us?
+      options:
+        - label: Yes, I’m a sponsor. 💖
+          required: false
