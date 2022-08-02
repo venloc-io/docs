@@ -1,0 +1,32 @@
+name: Add pull requests to Docs project
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  add-to-project:
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add pull request to project
+        uses: actions/add-to-project@main
+        with:
+          project-url: ${{ secrets.ADD_TO_PROJECT_PR_URL }}
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+      - name: Send telegram message on pull request open
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created pull request:
+
+            Pull request title: ${{ github.event.pull_request.title }}
+            
+            Repository: ${{ github.repository }}
+            
+            See changes: https://github.com/${{ github.repository }}/pull/${{github.event.pull_request.number}}
