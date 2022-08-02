@@ -1,0 +1,31 @@
+name: Add issues to Docs project
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Add issue request to project
+        uses: actions/add-to-project@main
+        with:
+          project-url: ${{ secrets.ADD_TO_PROJECT_PR_URL }}
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+      - name: Send telegram message on issue open
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created issue:
+
+            Issue title: ${{ github.event.issue.title }}
+            
+            Repository: ${{ github.repository }}
+            
+            See changes: https://github.com/${{ github.repository }}/issues/${{github.event.issue.number}}
